@@ -58,7 +58,6 @@ bool firstsortloc (element terms[], counter count, element item, counter & left)
 }
 
 // last find position in sorted order
-// returns false with left = count for item > last
 bool lastsortloc (element terms[], counter count, element item, counter & left)
 {
   counter right = count - 1, mid;
