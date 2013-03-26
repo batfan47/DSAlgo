@@ -50,7 +50,6 @@ bool firstsortloc (element terms[], counter count, element item, counter & left)
   counter right = count, mid;
   left = 0;
   while (left != right) {
-//    cout << left << " " << right << endl;
     mid = left + (right - left)/2;
     if (terms[mid] < item) left = mid + 1;
     else right = mid;
@@ -66,7 +65,6 @@ bool lastsortloc (element terms[], counter count, element item, counter & left)
   counter right = count - 1, mid;
   if (!firstsortloc(terms, count, item, left)) return false;
   while (left != right) {
-//    cout << left - start << " " << right - start << endl;
     mid = left + (right + 1 - left)/2;
     if (terms[mid] > item) right = mid - 1;
     else left = mid;
