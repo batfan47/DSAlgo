@@ -51,7 +51,8 @@ bool firstsortloc (element terms[], counter count, element item, counter & left)
   left = 0;
   while (left != right) {
     mid = left + (right - left)/2;
-    if (terms[mid] < item) left = mid + 1;
+    if (terms[mid] < item)
+      left = mid + 1;
     else right = mid;
   }
   return (left == count ? false : terms[left] == item);
@@ -66,10 +67,12 @@ bool lastsortloc (element terms[], counter count, element item, counter & left)
   if (!firstsortloc(terms, count, item, left)) return false;
   while (left != right) {
     mid = left + (right + 1 - left)/2;
-    if (terms[mid] > item) right = mid - 1;
+    if (terms[mid] > item)
+      right = mid - 1;
     else left = mid;
-    if (term[right] != item) --right;
-    else left = right;
+    if (term[right] == item)
+      left = right;
+    else --right;
   }
   return (terms[left] == item);
 }
