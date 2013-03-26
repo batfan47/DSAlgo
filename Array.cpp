@@ -74,7 +74,7 @@ bool lastsortloc (element terms[], counter count, element item, counter & left)
   return (terms[left] == item);
 }
 
-// returns cieling postion.second = count for element > last element
+// returns cieling postion.second = count for item > last
 cpair floorNcieling (element terms[], counter count, element item)
 {
   cpair position;
