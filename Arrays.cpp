@@ -44,41 +44,46 @@ void mergesort (element terms[], counter count)
 
 // first insert position in sorted order
 // returns false with left = count for item > last
+// Check boundaries before use
 bool firstsortloc (element terms[], counter count, element item, counter & left)
 {
   counter right = count, mid;
   left = 0;
-  if (!count) return false;
-  do {
+  while (left != right) {
+//    cout << left << " " << right << endl;
     mid = left + (right - left)/2;
     if (terms[mid] < item) left = mid + 1;
     else right = mid;
-  } while (left != right);
+  }
   return (left == count ? false : terms[left] == item);
 }
 
 // last find position in sorted order
+// returns false with left = count for item > last
+// Check Boundaries before use
 bool lastsortloc (element terms[], counter count, element item, counter & left)
 {
   counter right = count - 1, mid;
   if (!firstsortloc(terms, count, item, left)) return false;
-  do {
-    mid = left + (right - left)/2;
-    if (terms[mid] > item) right = mid;
+  while (left != right) {
+//    cout << left - start << " " << right - start << endl;
+    mid = left + (right + 1 - left)/2;
+    if (terms[mid] > item) right = mid - 1;
     else left = mid;
-    if (left != right && terms[right] != item) --right;
-    if (left != right && terms[right] == item) ++left;
+    if (term[right] != item) --right;
+    else left = right;
   }
-  while (left != right);
   return (terms[left] == item);
 }
 
 // returns cieling postion.second = count for item > last
+// Check Boundaries before use
 cpair floorNcieling (element terms[], counter count, element item)
 {
   cpair position;
-  firstsortloc (terms, count, item, position.first);
+  firstsortloc(terms, count, item, position.first);
+  if (lastsortloc(terms + position.first, count - position.first, 
+    item, position.second)) ++position.second;
   if (position.first) --position.first;
-  if (lastsortloc(terms, count, item, position.second)) ++position.second;
   return position;
 }
