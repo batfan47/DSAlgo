@@ -64,14 +64,12 @@ counter sortcount(element terms[], counter count, element item)
   counter position, left, right = count - 1, mid;
   if (!firstsortloc(terms, count, item, position)) return 0;
   left = position;
-  while (left != right) {
+  while (left != right && terms[right] != item) {
+    --right; // We know it's not item
     mid = left + (right + 1 - left)/2;
     if (terms[mid] > item)
       right = mid - 1;
     else left = mid;
-    if (terms[right] == item)
-      left = right;
-    else --right;
   }
   left = position;
   return (right + 1 - left);
