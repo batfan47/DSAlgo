@@ -42,10 +42,9 @@ void mergesort (element terms[], counter count)
 
 // first insert position in sorted order
 // returns false with left = count for item > last
-// Check boundaries before use
-bool firstsortloc (element terms[], counter count, element item, counter & left)
+bool firstsortloc (element terms[], counter n, element item, counter & left)
 {
-  counter right = count, mid;
+  counter right = n, mid;
   left = 0;
   while (left != right && terms[left] != item) {
     mid = left + (right - left)/2;
@@ -53,22 +52,22 @@ bool firstsortloc (element terms[], counter count, element item, counter & left)
       left = mid + 1;
     else right = mid;
   }
-  return (left == count ? false : terms[left] == item);
+  return (left == n ? false : terms[left] == item);
 }
 
-// Count occurence of item in sorted terms
-counter sortcount(element terms[], counter count, element item)
+// Count occurrence of item in sorted terms
+// startindex = count for item > last
+counter sortcount(element terms[], counter n, element item, counter & startindex)
 {
-  counter position, left, right = count - 1, mid;
-  if (!firstsortloc(terms, count, item, position)) return 0;
-  left = position;
+  counter left, right = n - 1, mid;
+  if (!firstsortloc(terms, n, item, startindex)) return 0;
+  left = startindex;
   while (left != right && terms[right] != item) {
     --right; // We know it's not item
-    mid = left + (right + 1 - left)/2;
+    mid = left + (right - left)/2;
     if (terms[mid] > item)
       right = mid - 1;
     else left = mid;
   }
-  left = position;
-  return (right + 1 - left);
+  return (right + 1 - startindex);
 }
