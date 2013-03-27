@@ -49,7 +49,7 @@ bool firstsortloc (element terms[], counter count, element item, counter & left)
 {
   counter right = count, mid;
   left = 0;
-  while (left != right) {
+  while (left != right && terms[left] != item) {
     mid = left + (right - left)/2;
     if (terms[mid] < item)
       left = mid + 1;
@@ -58,33 +58,21 @@ bool firstsortloc (element terms[], counter count, element item, counter & left)
   return (left == count ? false : terms[left] == item);
 }
 
-// last find position in sorted order
-// returns false with left = count for item > last
-// Check Boundaries before use
-bool lastsortloc (element terms[], counter count, element item, counter & left)
+// Count occurence of item in sorted terms
+counter sortcount(element terms[], counter count, element item)
 {
-  counter right = count - 1, mid;
-  if (!firstsortloc(terms, count, item, left)) return false;
+  counter position, left, right = count - 1, mid;
+  if (!firstsortloc(terms, count, item, position)) return 0;
+  left = position;
   while (left != right) {
     mid = left + (right + 1 - left)/2;
     if (terms[mid] > item)
       right = mid - 1;
     else left = mid;
-    if (term[right] == item)
+    if (terms[right] == item)
       left = right;
     else --right;
   }
-  return (terms[left] == item);
-}
-
-// returns cieling postion.second = count for item > last
-// Check Boundaries before use
-cpair floorNcieling (element terms[], counter count, element item)
-{
-  cpair position;
-  firstsortloc(terms, count, item, position.first);
-  if (lastsortloc(terms + position.first, count - position.first, 
-    item, position.second)) ++position.second;
-  if (position.first) --position.first;
-  return position;
+  left = position;
+  return (right + 1 - left);
 }
