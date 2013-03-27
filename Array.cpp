@@ -17,7 +17,6 @@ element kadane (element terms[], counter count, counter &startloc, counter & end
       cstart = i;
     }
     cend = i;
-    cout << currMax << " " << max << endl;
     if (currMax > max) {
       max = currMax += terms[i];
       startloc = cstart;
